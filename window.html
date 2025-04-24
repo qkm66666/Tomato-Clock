@@ -2,30 +2,42 @@
 <head>
     <title>Tomato</title>
     <meta charset="utf-8">
+    <!-- 引入主样式表 -->
     <link rel="stylesheet" href="style.css">
+    <!-- 引入clockpicker插件样式 -->
     <link href="plugins/clockpicker/clockpicker.css" rel="stylesheet">
     <link href="plugins/clockpicker/standalone.css" rel="stylesheet">
+    <!-- 引入jQuery库 -->
     <script src="js/jquery-3.1.1.min.js" charset="utf-8"></script>
+    <!-- 引入主逻辑脚本 -->
     <script src="js/main.js" charset="utf-8"></script>
+    <!-- 引入clockpicker插件脚本 -->
     <script src="plugins/clockpicker/clockpicker.js" charset="utf-8"></script>
 </head>
 <body>
+    <!-- 顶部导航栏 -->
     <header>
         <nav>
             <ul>
+                <!-- 说明按钮，点击显示番茄工作法介绍 -->
                 <li id="desc-button"><a href="#0">?</a></li>
+                <!-- 首页按钮，默认选中，显示主倒计时页面 -->
                 <li id="home-button"><a class="nav-selected" href="#1">开始番茄</a></li>
+                <!-- 设置按钮，切换到设置页面 -->
                 <li><a href="#2">设置</a></li>
             </ul>
+            <!-- 当前番茄状态显示 -->
             <span id="tomato-state">无番茄</span>
         </nav>
     </header>
     <main>
+        <!-- 番茄工作法说明区域，默认隐藏 -->
         <div id="description" style="display: none">
             <div class="description-item">
                 <h2>什么是番茄工作法？</h2>
                 <p>假设你有个名为task的任务。设置4个番茄，每个番茄时长为25分钟，短休息为5分钟，长休息为20分钟，那么每25分钟的工作后会休息5分钟，直到第四个番茄过后来一次20分钟的长休息。随后循环进行番茄工作，直到完成你设定的任务。</p>
                 <div class="limit-container">
+                    <!-- 番茄工作法百科链接 -->
                     <a target="_blank" href="https://zh.wikipedia.org/wiki/%E7%95%AA%E8%8C%84%E5%B7%A5%E4%BD%9C%E6%B3%95">wikipedia</a>
                     <a target="_blank" href="http://baike.baidu.com/link?url=Nd6AdKpdluNxO1KQERxIMuVOSzlvPi7rjl-OSxtogIJRghpYlfImFUe-pYpCGr9HNSTySWrFy7z4aQGJ4W5McNFkNTpWVBIc7rjQGlMbMtCZo64q6EbELB6Wml0ZWRJb5-bPPx6OcvjiYBJlMEQmc_">百度百科</a>
                 </div>
@@ -40,14 +52,20 @@
             </div>
         </div>
 
+        <!-- 主页面：倒计时与统计信息 -->
         <div id="mainPage">
+            <!-- 番茄倒计时显示 -->
             <div id="countdown">00:00</div>
+            <!-- 开始按钮 -->
             <div id="start-button"><a href="##">开始</a></div>
+            <!-- 今日任务统计信息 -->
             <div class="task-message">
               <div class="task-title">
                 <p>今天</p>
               </div>
+              <!-- 已完成番茄组数和每组番茄数 -->
               <p>已完成<span id="message-finished">0</span>组番茄（每组有<span id="message-number">0</span>个番茄）任务</p>
+              <!-- 番茄、短休息、长休息统计表 -->
               <table>
                 <tr>
                   <th><span id="th-tomato">0</span>个番茄</th>
@@ -55,19 +73,24 @@
                   <th><span id="th-long">0</span>个长休息</th>
                 </tr>
                 <tr>
+                  <!-- 各项耗时统计 -->
                   <td><span id="td-worktime">0<span class="td-color">小时</span>0<span class="td-color">分钟</span></span></td>
                   <td><span id="td-shorttime">0<span class="td-color">小时</span>0<span class="td-color">分钟</span></span></td>
                   <td><span id="td-longtime">0<span class="td-color">小时</span>0<span class="td-color">分钟</span></span></td>
                 </tr>
               </table>
               <div class="task-title">
+                <!-- 总耗时统计 -->
                 <p>总耗时:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="total-time">0<span class="td-color">小时</span>0<span class="td-color">分钟</span></span></p>
               </div>
             </div>
         </div>
+        <!-- 设置页面，默认隐藏 -->
         <div id="configure" style="display: none">
+            <!-- 设置导航栏 -->
             <nav>
                 <ul>
+                    <!-- 各类设置选项，点击切换不同设置内容 -->
                     <li><a class="config-selected" href="#1">时钟设置</a></li>
                     <li><a href="#1">提醒设置</a></li>
                     <li><a href="#1">护眼设置</a></li>
@@ -76,29 +99,31 @@
                 </ul>
             </nav>
 
+            <!-- 时钟设置内容 -->
             <div class="config-content">
                 <form id="clock-config">
+                    <!-- 番茄数设置 -->
                     <span class="input">
                     <input class="input__field input__field--isao" type="text" placeholder="推荐4个番茄" id="tomato-number" value="4">
                     <label class="input__label input__label--isao" for="tomato-number" data-content="番茄数(1~20)">
                       <span class="input__label-content input__label-content--isao">番茄数</span>
                     </label>
                     </span>
-
+                    <!-- 单个番茄时长设置 -->
                     <span class="input">
                     <input class="input__field input__field--isao" type="text" placeholder="推荐25分钟" id="work-period" value="30">
                     <label class="input__label input__label--isao" for="work-period" data-content="一个番茄的时长(1~59)">
                       <span class="input__label-content input__label-content--isao">分钟/个 番茄</span>
                     </label>
                     </span>
-
-                    <span class="input">
+                    <!-- 短休息时长设置 -->
+                    <span class="input"></span>
                     <input class="input__field input__field--isao" type="text" placeholder="推荐5分钟" id="short-rest" value="5">
                     <label class="input__label input__label--isao" for="short-rest" data-content="短休息(1~10)">
                       <span class="input__label-content input__label-content--isao">短休息</span>
                     </label>
                     </span>
-
+                    <!-- 长休息时长设置 -->
                     <span class="input">
                     <input class="input__field input__field--isao" type="text" placeholder="推荐15分钟" id="long-rest" value="15">
                     <label class="input__label input__label--isao" for="long-rest" data-content="长休息(5~30)">
@@ -108,12 +133,14 @@
                 </form>
             </div>
 
+            <!-- 提醒设置内容，默认隐藏 -->
             <div class="config-content" style="display: none">
+                <!-- 各类提醒音选择与开关 -->
                 <div class="notif-item">
-
                     <form>
                         <span>工作提醒声音</span>
                         <select class="notify-select" name="work">
+                          <!-- 各种音效选项 -->
                           <option value="0">All eye on me</option>
                           <option value="1">Quiet Knock</option>
                           <option value="2">Water Drop</option>
@@ -129,12 +156,13 @@
                           <option value="12">smodyssey_piano</option>
                         </select>
                     </form>
+                    <!-- 工作提醒音开关 -->
                     <span class='tg-list-item'>
                       <input class='tgl tgl-skewed audio-switch' id='notify1' type='checkbox' checked>
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='notify1'></label>
                     </span>
                 </div>
-
+                <!-- 短休息提醒音选择与开关 -->
                 <div class="notif-item">
                     <form>
                         <span>短休息提醒音</span>
@@ -159,7 +187,7 @@
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='notify2'></label>
                     </span>
                 </div>
-
+                <!-- 长休息提醒音选择与开关 -->
                 <div class="notif-item">
                     <form>
                         <span>长休息提醒音</span>
@@ -184,7 +212,7 @@
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='notify3'></label>
                     </span>
                 </div>
-
+                <!-- 护眼提醒音选择与开关 -->
                 <div class="notif-item">
                     <form>
                         <span>护眼提醒声音</span>
@@ -209,7 +237,7 @@
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='notify4'></label>
                     </span>
                 </div>
-
+                <!-- 喝水提醒音选择与开关 -->
                 <div class="notif-item">
                     <form>
                         <span>喝水提醒声音</span>
@@ -234,15 +262,17 @@
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='notify5'></label>
                     </span>
                 </div>
+                <!-- 重置提醒设置按钮 -->
                 <a id="reset1" href="#">重置</a>
-
             </div>
+            <!-- 护眼设置内容，默认隐藏 -->
             <div class="config-content" style="display: none">
+                <!-- 护眼提醒开关 -->
                 <span class='tg-list-item'>
                   <input class='tgl tgl-flip' id='eye-button' type='checkbox'>
                   <label class='tgl-btn button' data-tg-off='Nope' data-tg-on='Yeah!' for='eye-button'></label>
                 </span>
-
+                <!-- 护眼提醒间隔设置 -->
                 <span class="input">
                 <input class="input__field input__field--isao" type="text" placeholder="推荐15分钟" id="eyecare" value="17">
                 <label class="input__label input__label--isao" for="eyecare" data-content="护眼提醒间隔(5~30)">
@@ -250,13 +280,14 @@
                 </label>
                 </span>
             </div>
-
+            <!-- 喝水设置内容，默认隐藏 -->
             <div class="config-content" style="display: none">
+                <!-- 喝水提醒开关 -->
                 <span class='tg-list-item'>
                   <input class='tgl tgl-flip' id='drink-button' type='checkbox'>
                   <label class='tgl-btn button' data-tg-off='Nope' data-tg-on='Yeah!' for='drink-button'></label>
                 </span>
-
+                <!-- 每杯水的时间设置与开关，支持clockpicker时间选择 -->
                 <div class="time-item">
                     <div class="input-group clockpicker" data-autoclose="true">
                         <span class="list-title">第一杯水</span>
@@ -270,7 +301,6 @@
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='cb1'></label>
                     </span>
                 </div>
-
                 <div class="time-item">
                     <div class="input-group clockpicker" data-autoclose="true">
                         <span class="list-title">第二杯水</span>
@@ -284,7 +314,6 @@
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='cb2'></label>
                     </span>
                 </div>
-
                 <div class="time-item">
                     <div class="input-group clockpicker" data-autoclose="true">
                         <span class="list-title">第三杯水</span>
@@ -298,7 +327,6 @@
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='cb3'></label>
                     </span>
                 </div>
-
                 <div class="time-item">
                     <div class="input-group clockpicker" data-autoclose="true" data-placement="top">
                         <span class="list-title">第四杯水</span>
@@ -312,7 +340,6 @@
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='cb4'></label>
                     </span>
                 </div>
-
                 <div class="time-item">
                     <div class="input-group clockpicker" data-autoclose="true" data-placement="top">
                         <span class="list-title">第五杯水</span>
@@ -326,7 +353,6 @@
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='cb5'></label>
                     </span>
                 </div>
-
                 <div class="time-item">
                     <div class="input-group clockpicker" data-autoclose="true" data-placement="top">
                         <span class="list-title">第六杯水</span>
@@ -340,7 +366,6 @@
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='cb6'></label>
                     </span>
                 </div>
-
                 <div class="time-item">
                     <div class="input-group clockpicker" data-autoclose="true" data-placement="top">
                         <span class="list-title">第七杯水</span>
@@ -354,8 +379,7 @@
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='cb7'></label>
                     </span>
                 </div>
-
-                <div class="time-item">
+                <div class="time-item"></div>
                     <div class="input-group clockpicker" data-autoclose="true" data-placement="top">
                         <span class="list-title">第八杯水</span>
                         <input type="text" class="form-control" value="21:30">
@@ -368,19 +392,17 @@
                       <label class='tgl-btn toggle-button' data-tg-off='OFF' data-tg-on='ON' for='cb8'></label>
                     </span>
                 </div>
-
-
             </div>
+            <!-- 关于页面，默认隐藏 -->
             <div class="config-content about" style="display: none">
                 <h2>关于</h2>
                 <p>番茄APP可以帮助你提升工作学习效率，让你在做事时更加专注</p>
                 <p>工作学习过程中保护眼睛、及时补水同样重要</p>
             </div>
-
-
         </div>
     </main>
 
+    <!-- 音频资源列表，供提醒音选择使用 -->
     <div class="">
         <audio src="assets/audio/all-eyes-on-me.mp3"></audio>
         <audio src="assets/audio/quiet-knock.mp3"></audio>
@@ -388,17 +410,13 @@
         <audio src="assets/audio/you-wouldnt-believe.mp3"></audio>
         <audio src="assets/audio/wet.mp3"></audio>
         <audio src="assets/audio/waterWave.wav"></audio>
-
         <audio src="assets/audio/arpeggio.mp3"></audio>
         <audio src="assets/audio/oringz-w435.mp3"></audio>
         <audio src="assets/audio/oringz-w437.mp3"></audio>
-
         <audio src="assets/audio/and-a-happy-new-year-sms.mp3"></audio>
         <audio src="assets/audio/jingle-bells-sms.mp3"></audio>
         <audio src="assets/audio/jingle-jingle-bells.mp3"></audio>
         <audio src="assets/audio/smodyssey_piano.mp3"></audio>
     </div>
-
 </body>
-
 </html>
